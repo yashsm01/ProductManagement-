@@ -1,0 +1,47 @@
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item hover"><a routerLink="/master"class="nav-link active " aria-current="page">Master</a></li>
+        <li class="nav-item hover"><a routerLink="/masterlist" class="nav-link">Master List</a></li>
+        <li class="nav-item hover"><a routerLink="/master" class="nav-link">Unique Codes</a></li>
+        <li class="nav-item hover"><a routerLink="/master" class="nav-link">Unique Codes List</a></li>
+        <li class="nav-item hover"><a class="nav-link" (click)="LOGOUT()">Logout</a></li>
+      </ul>
+    </header>
+    <div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="UPID">Unique Product ID</label>
+                <input type="text" formControlName="UPID" class="form-control" [ngClass]="{ 'is-invalid': submitted && loginForm.controls['UPID'].errors }" >
+                <div *ngIf="submitted && loginForm.controls['UPID']?.errors" class="invalid-feedback">
+                    <div *ngIf="loginForm.controls['UPID']?.errors.required">UPID is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Name">Product Name</label>
+                <input type="text" formControlName="Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && loginForm.controls['Name'].errors }" />
+                <div *ngIf="submitted && loginForm.controls['Name'].errors" class="invalid-feedback">
+                    <div *ngIf="loginForm.controls['Name'].errors.required">Name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Image">Product Image</label>
+                <input type="file"  class="form-control" (change)="img($event)" [ngClass]="{ 'is-invalid': submitted && loginForm.controls['Image'].errors }" />
+                <div *ngIf="submitted && loginForm.controls['Image'].errors" class="invalid-feedback">
+                    <div *ngIf="loginForm.controls['Image'].errors.required">Image is required</div>
+                </div>
+            </div>
+            <div *ngIf="picture != ''">
+                <img [src]="picture" height="200" width="200" alt="Select and image">
+            </div>
+            <div class="form-group my-2">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Save
+                </button>
+            </div> 
+            <div *ngIf="message != ''">{{message}}</div>
+        </form> 
+    </div>
+  </div>
+
